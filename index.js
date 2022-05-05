@@ -13,7 +13,7 @@ app.use(cors());
 app.use('/api/doctors', doctors);
 require('dotenv').config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 mongoose.connect('mongodb+srv://aravindd7:RMv9LdMJF4KpN2os@cluster0.dinyh.mongodb.net/rihal-ther?retryWrites=true&w=majority')
 .then(result => {
