@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the doctors listing API');
+    res.send('Welcome to the Rihal App Backend API');
 });
 app.use(cors());
 app.use('/api/doctors', doctors);

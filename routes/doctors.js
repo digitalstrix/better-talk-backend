@@ -7,8 +7,8 @@ const router = express.Router();
 router.post("/", (req, res) => {
   const doctor = new Doctor({
     name: req.body.name,
-    description: req.body.description,
-    consultation: req.body.consultation,
+    qualification: req.body.qualification,
+    rating: req.body.rating,
   });
 
   doctor.save()
