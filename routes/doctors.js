@@ -8,7 +8,6 @@ router.post("/", (req, res) => {
   const doctor = new Doctor({
     name: req.body.name,
     qualification: req.body.qualification,
-    rating: req.body.rating,
   });
 
   doctor.save()
