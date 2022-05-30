@@ -15,11 +15,15 @@ router.get('/', (req, res) => {
 
 
 router.post("/createOrder", async (req, res) => {
+  try {
   const order = await razorpay.orders.create({
     amount: req.body.amount,
     currency: req.body.currency,
   });
   res.send(order);
+  catch (err) {
+    console.log(err);
+  }
 });
 
 

@@ -1,16 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const doctors = require('./routes/doctors');
+const razorpay = require('./routes/razorpay');
+
 var cors = require('cors');
 
 const app = express()
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Rihal App Backend API');
+    res.send('Welcome to the Rahil App Backend API');
 });
 app.use(cors());
 app.use('/api/doctors', doctors);
+app.use('/api/razorpay', razorpay);
 require('dotenv').config();
 
 const port = process.env.PORT || 5000;
