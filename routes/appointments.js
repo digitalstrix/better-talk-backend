@@ -49,7 +49,7 @@ router.get("/accept/:id", (req, res) => {
       if (!appointment) {
         console.log("No appointment found");
       } else {
-        res.write(appointment.acceptStatus);
+        res.write(`data: ${appointment.acceptStatus}`);
       }
     })
     .catch((err) => console.log(err));
