@@ -31,8 +31,8 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 });
 
-// /api/appointment/id
-router.get('/:id', (req, res) => {
+// /api/appointment/accept/id
+router.post('/accept/:id', (req, res) => {
     const appointmentId = req.params.id;
 
     Appointment.findById(appointmentId)
@@ -40,10 +40,30 @@ router.get('/:id', (req, res) => {
             appointment.acceptStatus = true;
             appointment.save(function(err) {
                 if(!err) {
-                    console.log("Appointment Status updated");
+                    console.log("Appointment Accept Status updated");
                 }
                 else {
-                    console.log("Error: appointment update status fail");
+                    console.log("Error: appointment Accept update status fail");
+                }
+            });
+            res.send(appointment);
+        })
+        .catch(err => console.log(err))
+});
+
+// /api/appointment/start/id
+router.post('/start/:id', (req, res) => {
+    const appointmentId = req.params.id;
+
+    Appointment.findById(appointmentId)
+        .then(appointment => {
+            appointment.acceptStatus = true;
+            appointment.save(function(err) {
+                if(!err) {
+                    console.log("Appointment Start Status updated");
+                }
+                else {
+                    console.log("Error: appointment start update status fail");
                 }
             });
             res.send(appointment);
