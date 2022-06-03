@@ -1,5 +1,5 @@
 const express = require("express");
-
+const sseExpress = require("sse-express");
 const Appointment = require("../models/Appointment");
 
 const router = express.Router();
@@ -36,23 +36,28 @@ router.get("/", (req, res) => {
 //GET /api/appointment/accept/id
 router.get("/accept/:id", (req, res) => {
   const appointmentId = req.params.id;
+  let status = false;
   console.log("appointmentId: ", appointmentId);
-  res.set({
-    "Cache-Control": "no-cache",
-    "Content-Type": "text/event-stream",
-    Connection: "keep-alive",
+  res.sse("connected", {
+    welcomeMsg: "Hello world!",
   });
-  //res.flushHeaders();
 
-  Appointment.findById(appointmentId)
-    .then((appointment) => {
-      if (!appointment) {
-        console.log("No appointment found");
-      } else {
-        res.write(`data: ${appointment.acceptStatus}`);
-      }
-    })
-    .catch((err) => console.log(err));
+  setInterval(function () {
+    Appointment.findById(appointmentId)
+      .then((appointment) => {
+        if (!appointment) {
+          console.log("No appointment found");
+        } else {
+          console.log("appointment.acceptStatus: ", appointment.acceptStatus);
+          status = appointment.acceptStatus;
+        }
+      })
+      .catch((err) => console.log(err));
+
+    res.sse("update", {
+      value: status,
+    });
+  }, 2000);
 });
 
 //POST /api/appointment/accept/id
