@@ -31,13 +31,22 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 });
 
-// /api/doctors/id
+// /api/appointment/id
 router.get('/:id', (req, res) => {
-    const doctorId = req.params.id;
+    const appointmentId = req.params.id;
 
-    Doctor.findById(doctorId)
-        .then(doctor => {
-            res.send(doctor);
+    Appointment.findById(appointmentId)
+        .then(appointment => {
+            appointment.acceptStatus = true;
+            appointment.save(function(err) {
+                if(!err) {
+                    console.log("Appointment Status updated");
+                }
+                else {
+                    console.log("Error: appointment update status fail");
+                }
+            });
+            res.send(appointment);
         })
         .catch(err => console.log(err))
 });
