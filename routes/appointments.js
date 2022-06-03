@@ -10,6 +10,7 @@ router.post("/", (req, res) => {
     to: req.body.to,
     time: req.body.time,
     acceptStatus: req.body.acceptStatus,
+    startStatus: req.body.startStatus,
   });
 
   appointment
@@ -57,12 +58,12 @@ router.put("/accept/:id", (req, res) => {
 });
 
 // /api/appointment/start/id
-router.post("/start/:id", (req, res) => {
+router.put("/start/:id", (req, res) => {
   const appointmentId = req.params.id;
 
   Appointment.findById(appointmentId)
     .then((appointment) => {
-      appointment.acceptStatus = true;
+      appointment.startStatus = true;
       appointment.save(function (err) {
         if (!err) {
           console.log("Appointment Start Status updated");
