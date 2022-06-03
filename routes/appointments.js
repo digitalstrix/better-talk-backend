@@ -34,31 +34,31 @@ router.get("/", (req, res) => {
 });
 
 //GET /api/appointment/accept/id
-router.get("/accept/:id", sseExpress, function(req, res) {
-  const appointmentId = req.params.id;
-  let status = false;
-  console.log("appointmentId: ", appointmentId);
-  res.sse("connected", {
-    welcomeMsg: "Hello world!",
-  });
+// router.get("/accept/:id", sseExpress, function(req, res) {
+//   const appointmentId = req.params.id;
+//   let status = false;
+//   console.log("appointmentId: ", appointmentId);
+//   res.sse("connected", {
+//     welcomeMsg: "Hello world!",
+//   });
 
-  setInterval(function () {
-    Appointment.findById(appointmentId)
-      .then((appointment) => {
-        if (!appointment) {
-          console.log("No appointment found");
-        } else {
-          console.log("appointment.acceptStatus: ", appointment.acceptStatus);
-          status = appointment.acceptStatus;
-        }
-      })
-      .catch((err) => console.log(err));
+//   setInterval(function () {
+//     Appointment.findById(appointmentId)
+//       .then((appointment) => {
+//         if (!appointment) {
+//           console.log("No appointment found");
+//         } else {
+//           console.log("appointment.acceptStatus: ", appointment.acceptStatus);
+//           status = appointment.acceptStatus;
+//         }
+//       })
+//       .catch((err) => console.log(err));
 
-    res.sse("update", {
-      value: status,
-    });
-  }, 2000);
-});
+//     res.sse("update", {
+//       value: status,
+//     });
+//   }, 2000);
+// });
 
 //POST /api/appointment/accept/id
 router.put("/accept/:id", (req, res) => {
