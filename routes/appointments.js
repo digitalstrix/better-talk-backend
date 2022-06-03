@@ -33,6 +33,23 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+
+// /api/appointment/accept/id
+router.get("/accept/:id", (req, res) => {
+  const appointmentId = req.params.id;
+  console.log('appointmentId: ', appointmentId);
+
+  Appointment.findById(appointmentId)
+    .then((appointment) => {
+      if (!appointment) {
+        console.log("No appointment found");
+      } else {
+        res.send(appointment);
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
 // /api/appointment/accept/id
 router.put("/accept/:id", (req, res) => {
   const appointmentId = req.params.id;
