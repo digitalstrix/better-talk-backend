@@ -61,7 +61,7 @@ router.get("/accept/:id", (req, res) => {
 });
 
 //POST /api/appointment/accept/id
-router.put("/accept/:id", (req, res) => {
+router.put("/accept/:id", sseExpress , function(req, res) {
   const appointmentId = req.params.id;
   console.log("appointmentId: ", appointmentId);
 
