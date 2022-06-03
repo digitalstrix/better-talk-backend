@@ -35,6 +35,7 @@ router.get("/", (req, res) => {
 // /api/appointment/accept/id
 router.put("/accept/:id", (req, res) => {
   const appointmentId = req.params.id;
+  console.log('appointmentId: ', appointmentId);
 
   Appointment.findById(appointmentId)
     .then((appointment) => {
