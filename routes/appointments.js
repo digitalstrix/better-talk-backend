@@ -34,7 +34,7 @@ router.get("/", (req, res) => {
 });
 
 //GET /api/appointment/accept/id
-router.get("/accept/:id",sseExpress, (req, res) {
+router.get("/accept/:id", sseExpress, function(req, res) {
   const appointmentId = req.params.id;
   let status = false;
   console.log("appointmentId: ", appointmentId);
