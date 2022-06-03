@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const doctors = require('./routes/doctors');
+const appointments = require('./routes/appointments');
+const users = require('./routes/users');
 const razorpay = require('./routes/razorpay');
 
 var cors = require('cors');
@@ -13,6 +15,8 @@ app.get('/', (req, res) => {
 });
 app.use(cors());
 app.use('/api/doctors', doctors);
+app.use('/api/users', users);
+app.use('/api/appointments', appointments);
 app.use('/api/razorpay', razorpay);
 require('dotenv').config();
 

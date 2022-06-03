@@ -1,41 +1,41 @@
 const express = require("express");
 
-const Doctor = require("../models/Doctor");
+const User = require("../models/User");
 
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  const doctor = new Doctor({
+  const user = new User({
     name: req.body.name,
     qualification: req.body.qualification,
   });
 
-  doctor.save()
+  user.save()
   .then(result => {
       res.send({
-          message: "Doctor data created successfully",
+          message: "User data created successfully",
           data: result
       })
   })
   .catch(err => console.log(err))
 });
 
-// /api/doctors
+// /api/users
 router.get('/', (req, res) => {
-    Doctor.find()
-        .then(doctors => {
-            res.send(doctors)
+    User.find()
+        .then(users => {
+            res.send(users)
         })
         .catch(err => console.log(err))
 });
 
-// /api/doctors/id
+// /api/users/id
 router.get('/:id', (req, res) => {
-    const doctorId = req.params.id;
+    const userId = req.params.id;
 
-    Doctor.findById(doctorId)
-        .then(doctor => {
-            res.send(doctor);
+    User.findById(userId)
+        .then(user => {
+            res.send(user);
         })
         .catch(err => console.log(err))
 });
