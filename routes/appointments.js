@@ -34,7 +34,7 @@ router.get("/", (req, res) => {
 });
 
 //GET /api/appointment/accept/id
-router.get("/accept/:id", (req, res) => {
+router.get("/accept/:id",sseExpress, (req, res) {
   const appointmentId = req.params.id;
   let status = false;
   console.log("appointmentId: ", appointmentId);
@@ -61,7 +61,7 @@ router.get("/accept/:id", (req, res) => {
 });
 
 //POST /api/appointment/accept/id
-router.put("/accept/:id", sseExpress , function(req, res) {
+router.put("/accept/:id", (req, res) => {
   const appointmentId = req.params.id;
   console.log("appointmentId: ", appointmentId);
 
