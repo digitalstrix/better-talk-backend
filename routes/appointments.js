@@ -38,7 +38,7 @@ router.get("/accept/:id", sseExpress, function (req, res) {
   const appointmentId = req.params.id;
   let status = false;
   console.log("appointmentId: ", appointmentId);
-  res.sse("connected", {
+  res.sse('open', {
     welcomeMsg: "Hello world!",
   });
 
@@ -54,7 +54,7 @@ router.get("/accept/:id", sseExpress, function (req, res) {
       })
       .catch((err) => console.log(err));
 
-    res.sse("update", {
+    res.sse('message', {
       value: status,
     });
   }, 2000);
