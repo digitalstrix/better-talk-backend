@@ -8,36 +8,106 @@ router.post("/", (req, res) => {
   const doctor = new Doctor({
     name: req.body.name,
     qualification: req.body.qualification,
+    sessions: req.body.sessions,
+    minutes: req.body.minutes,
+    calls: req.body.calls,
   });
 
-  doctor.save()
-  .then(result => {
+  doctor
+    .save()
+    .then((result) => {
       res.send({
-          message: "Doctor data created successfully",
-          data: result
-      })
-  })
-  .catch(err => console.log(err))
+        message: "Doctor data created successfully",
+        data: result,
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 // /api/doctors
-router.get('/', (req, res) => {
-    Doctor.find()
-        .then(doctors => {
-            res.send(doctors)
-        })
-        .catch(err => console.log(err))
+router.get("/", (req, res) => {
+  Doctor.find()
+    .then((doctors) => {
+      res.send(doctors);
+    })
+    .catch((err) => console.log(err));
 });
 
 // /api/doctors/id
-router.get('/:id', (req, res) => {
-    const doctorId = req.params.id;
+router.get("/:id", (req, res) => {
+  const doctorId = req.params.id;
 
-    Doctor.findById(doctorId)
-        .then(doctor => {
-            res.send(doctor);
-        })
-        .catch(err => console.log(err))
+  Doctor.findById(doctorId)
+    .then((doctor) => {
+      doctor.sessions = req.body.sessions;
+    })
+    .catch((err) => console.log(err));
+});
+
+// /api/doctors/sessions/id
+router.put("/sessions/:id", (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { sessions: req.body.sessions },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor Session updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// /api/doctors/calls/id
+router.put("/calls/:id", (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { calls: req.body.calls },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor Calls updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// /api/doctors/minutes/id
+router.put("/minutes/:id", (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { minutes: req.body.minutes },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor minutes updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
 });
 
 module.exports = router;
