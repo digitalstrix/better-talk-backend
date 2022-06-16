@@ -50,7 +50,7 @@ router.put("/sessions/:id", (req, res) => {
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $set: { sessions: req.body.sessions },
+      $inc: { sessions: req.body.sessions },
     },
     (err, result) => {
       if (err) {
@@ -72,7 +72,7 @@ router.put("/calls/:id", (req, res) => {
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $set: { calls: req.body.calls },
+      $inc: { calls: req.body.calls },
     },
     (err, result) => {
       if (err) {
@@ -94,7 +94,7 @@ router.put("/minutes/:id", (req, res) => {
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $set: { minutes: req.body.minutes },
+      $inc: { minutes: req.body.minutes },
     },
     (err, result) => {
       if (err) {
