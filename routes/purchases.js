@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/", (req, res) => {
   const purchase = new Purchase({
     by: req.body.by,
+    username: req.body.username,
     time: req.body.time,
     appointmentType: req.body.appointmentType,
     packType: req.body.packType,    
