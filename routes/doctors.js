@@ -11,6 +11,8 @@ router.post("/", (req, res) => {
     sessions: req.body.sessions,
     minutes: req.body.minutes,
     calls: req.body.calls,
+    loggedIn: req.body.loggedIn,
+    ratings: req.body.ratings
   });
 
   doctor
@@ -109,5 +111,62 @@ router.put("/minutes/:id", (req, res) => {
     }
   );
 });
+
+// /api/doctors/loggedin/all
+router.get('/loggedin/all', (req, res) => {
+
+  Doctor.find({loggedIn: true})
+      .then(doctor => {
+          res.send(doctor);
+      })
+      .catch(err => console.log(err))
+});
+
+// /api/doctors/loggedin/id
+router.put('/loggedin/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { loggedIn: req.body.loggedIn },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor loggedIn updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+
+// /api/doctors/ratings/id
+router.put('/ratings/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $push: { from: req.body.from, rating: req.body.rating },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor Rating updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
 
 module.exports = router;

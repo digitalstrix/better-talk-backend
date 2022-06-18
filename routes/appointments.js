@@ -11,6 +11,7 @@ router.post("/", (req, res) => {
     time: req.body.time,
     acceptStatus: req.body.acceptStatus,
     startStatus: req.body.startStatus,
+    appointmentType: req.body.appointmentType,
   });
 
   appointment
@@ -33,75 +34,27 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-//GET /api/appointment/accept/id
-// router.get("/accept/:id", sseExpress, function (req, res) {
-//   const appointmentId = req.params.id;
-//   let status = false;
-//   console.log("appointmentId: ", appointmentId);
-//   res.sse('open', {
-//     welcomeMsg: "Hello world!",
-//   });
+// /api/appointments/upcoming/id
+router.get('/upcoming/:id', (req, res) => {
+  const userId = req.params.id;
 
-//   setInterval(function () {
-//     Appointment.findById(appointmentId)
-//       .then((appointment) => {
-//         if (!appointment) {
-//           console.log("No appointment found");
-//         } else {
-//           console.log("appointment.acceptStatus: ", appointment.acceptStatus);
-//           status = appointment.acceptStatus;
-//         }
-//       })
-//       .catch((err) => console.log(err));
-
-//     res.sse('message', {
-//       value: status,
-//     });
-//   }, 2000);
-  
-// });
-
-//POST /api/appointment/accept/id
-router.put("/accept/:id", (req, res) => {
-  const appointmentId = req.params.id;
-  console.log("appointmentId: ", appointmentId);
-
-  Appointment.findById(appointmentId)
-    .then((appointment) => {
-      if (!appointment) {
-        console.log("No appointment found");
-      } else {
-        appointment.acceptStatus = true;
-        appointment.save(function (err) {
-          if (!err) {
-            console.log("Appointment Accept Status updated");
-          } else {
-            console.log("Error: appointment Accept update status fail");
-          }
-        });
-        res.send(appointment);
-      }
-    })
-    .catch((err) => console.log(err));
+  Appointment.find({from: userId})
+      .then(appointment => {
+          res.send(appointment);
+      })
+      .catch(err => console.log(err))
 });
 
-// /api/appointment/start/id
-router.put("/start/:id", (req, res) => {
-  const appointmentId = req.params.id;
+// /api/appointments/requests/id
+router.get('/requests/:id', (req, res) => {
+  const docId = req.params.id;
 
-  Appointment.findById(appointmentId)
-    .then((appointment) => {
-      appointment.startStatus = true;
-      appointment.save(function (err) {
-        if (!err) {
-          console.log("Appointment Start Status updated");
-        } else {
-          console.log("Error: appointment start update status fail");
-        }
-      });
-      res.send(appointment);
-    })
-    .catch((err) => console.log(err));
+  Appointment.find({to: docId})
+      .then(appointment => {
+          res.send(appointment);
+      })
+      .catch(err => console.log(err))
 });
+
 
 module.exports = router;
