@@ -5,7 +5,7 @@ const PurchaseSchema = new mongoose.Schema({
   username: {type: String, required: true },
   time: {type: Date, required: true },
   appointmentType: {type: String, required: true },
-  packType: {type: String, required: true },
+  packType: {type: Number, required: true },
 });
 
 module.exports = mongoose.model('Purchase', PurchaseSchema);
