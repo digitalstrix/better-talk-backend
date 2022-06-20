@@ -115,7 +115,7 @@ router.put("/minutes/:id", (req, res) => {
 // /api/doctors/loggedin/all
 router.get('/loggedin/all', (req, res) => {
 
-  Doctor.find({loggedIn: true})
+  Doctor.find({loggedIn: 'Online'})
       .then(doctor => {
           res.send(doctor);
       })

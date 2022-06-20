@@ -6,7 +6,7 @@ const DoctorSchema = new mongoose.Schema({
   sessions:  {type: Number },
   calls:  {type: Number },
   minutes: {type: Number },
-  loggedIn:  {type: Boolean},
+  loggedIn:  {type: String},
   rating:  {type: Array },
 });
 
