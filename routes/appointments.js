@@ -8,6 +8,7 @@ router.post("/", (req, res) => {
   const appointment = new Appointment({
     from: req.body.from,
     to: req.body.to,
+    fromName: req.body.fromName,
     time: req.body.time,
     acceptStatus: req.body.acceptStatus,
     startStatus: req.body.startStatus,
