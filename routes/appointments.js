@@ -52,7 +52,12 @@ router.get('/requests/:id', (req, res) => {
 
   Appointment.find({to: docId})
       .then(appointment => {
-          res.send(appointment);
+          if(appointment) {
+            res.send(appointment);
+          }
+          else {
+            console.log("No appointment for doctor Id ", docId, " found");
+          }
       })
       .catch(err => console.log(err))
 });
