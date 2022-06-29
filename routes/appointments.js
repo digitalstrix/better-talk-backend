@@ -57,6 +57,10 @@ router.get('/requests/:id', (req, res) => {
           }
           else {
             console.log("No appointment for doctor Id ", docId, " found");
+             res.send({
+             message: "No appointment for doctor Id found",
+             data: []
+           });
           }
       })
       .catch(err => console.log(err))
