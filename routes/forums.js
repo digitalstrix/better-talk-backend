@@ -35,11 +35,13 @@ router.get("/", (req, res) => {
 // add comments in posts
 router.put("/comments/:id", (req, res) => {
   const postId = req.params.id;
+  console.log(postId);
   Forum.findByIdAndUpdate(
     postId,
     {
-      $push: { comments: {content: req.body.comment, name: req.body.name } },
+      $push: { "comments": {"content": req.body.content, "name": req.body.name } },
     },
+    {new: true},
     (err, result) => {
       if (err) {
         console.log("err: ", err);
