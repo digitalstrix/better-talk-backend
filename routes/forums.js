@@ -32,4 +32,48 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// add comments in posts
+router.put("/comments/:id", (req, res) => {
+  const postId = req.params.id;
+  Forum.findByIdAndUpdate(
+    postId,
+    {
+      $push: { comments: req.body.comment },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Post comments updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// update likes in posts
+router.put("/likes/:id", (req, res) => {
+  const postId = req.params.id;
+  Forum.findByIdAndUpdate(
+    postId,
+    {
+      $inc: { likes: req.body.likes },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Post likes updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
 module.exports = router;
