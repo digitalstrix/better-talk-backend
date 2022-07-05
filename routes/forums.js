@@ -8,7 +8,8 @@ router.post("/", (req, res) => {
     name: req.body.name,
     content: req.body.content,
     likes: req.body.likes,
-    date: req.body.date
+    date: req.body.date,
+    comments: req.body.comments
   });
 
   forum
