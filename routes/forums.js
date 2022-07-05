@@ -7,6 +7,8 @@ router.post("/", (req, res) => {
   const forum = new Forum({
     name: req.body.name,
     content: req.body.content,
+    likes: req.body.likes,
+    date: req.body.date
   });
 
   forum

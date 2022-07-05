@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const ForumSchema = new Schema({
   name:  {type: String, required: true },
   content: {type: String, required: true },
+  likes: {type: Number},
+  date: {type: String},
 });
 
 module.exports = mongoose.model('Forum', ForumSchema);
