@@ -33,13 +33,13 @@ router.get("/", (req, res) => {
 });
 
 // add comments in posts
-router.post("/comments/:id", (req, res) => {
+router.put("/comments/:id", (req, res) => {
   const postId = req.params.id;
   console.log(postId);
   Forum.findByIdAndUpdate(
     postId,
     {
-      $push: { "comments": req.body.content },
+      $push: { "comments": {"name": req.body.name, "content": req.body.content} },
     },
     {new: true},
     (err, result) => {
