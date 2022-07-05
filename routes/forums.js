@@ -38,7 +38,7 @@ router.put("/comments/:id", (req, res) => {
   Forum.findByIdAndUpdate(
     postId,
     {
-      $push: { comments: req.body.comment },
+      $push: { comments: {content: req.body.comment, name: req.body.name } },
     },
     (err, result) => {
       if (err) {
