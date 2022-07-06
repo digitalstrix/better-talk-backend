@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   const notification = new Notification({
-    name: req.body.name,
+    to: req.body.to,
     content: req.body.content,
     type: req.body.type
   });
@@ -21,13 +21,16 @@ router.post("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// /api/Notification
-router.get("/", (req, res) => {
-    Notification.find()
-    .then((notification) => {
-      res.send(notification);
-    })
-    .catch((err) => console.log(err));
+// /api/notification/id
+router.get('/:id', (req, res) => {
+    const userId = req.params.id;
+
+    Notification.find({to: userId})
+        .then(notification => {
+            res.send(notification);
+        })
+        .catch(err => console.log(err))
 });
+
 
 module.exports = router;
