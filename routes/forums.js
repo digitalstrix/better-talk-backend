@@ -9,7 +9,8 @@ router.post("/", (req, res) => {
     content: req.body.content,
     likes: req.body.likes,
     date: req.body.date,
-    comments: req.body.comments
+    comments: req.body.comments,
+    userId: req.body.userId
   });
 
   forum

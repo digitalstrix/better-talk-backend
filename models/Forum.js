@@ -6,7 +6,8 @@ const ForumSchema = new Schema({
   content: {type: String, required: true },
   likes: {type: Number},
   date: {type: String},
-  comments: {type: Array}
+  comments: {type: Array},
+  userId: {type: mongoose.SchemaTypes.ObjectId, required: true }
 });
 
 module.exports = mongoose.model('Forum', ForumSchema);
