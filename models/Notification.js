@@ -6,4 +6,4 @@ const NotificationSchema = new mongoose.Schema({
   type: {type: String, required: true},
 });
 
-module.exports = mongoose.model('Appointment', AppointmentSchema);
+module.exports = mongoose.model('Notification', NotificationSchema);
