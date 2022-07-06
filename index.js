@@ -6,13 +6,14 @@ const users = require('./routes/users');
 const razorpay = require('./routes/razorpay');
 const purchases = require('./routes/purchases');
 const forums = require('./routes/forums');
+const notification=require('./routes/notification');
 var cors = require('cors');
 
 const app = express()
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Rahil App Backend API');
+    res.send('Welcome to the Better Talk App Backend API');
 });
 app.use(cors());
 app.use('/api/doctors', doctors);
@@ -21,7 +22,7 @@ app.use('/api/appointments', appointments);
 app.use('/api/razorpay', razorpay);
 app.use('/api/purchases', purchases);
 app.use('/api/forums', forums);
-
+app.use('/api/notification', notification);
 require('dotenv').config();
 
 const port = process.env.PORT || 5000;
