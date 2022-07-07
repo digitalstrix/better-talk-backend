@@ -7,7 +7,8 @@ router.post("/", (req, res) => {
   const notification = new Notification({
     to: req.body.to,
     content: req.body.content,
-    type: req.body.type
+    type: req.body.type,
+    date: req.body.date,
   });
 
   notification
@@ -22,15 +23,14 @@ router.post("/", (req, res) => {
 });
 
 // /api/notification/id
-router.get('/:id', (req, res) => {
-    const userId = req.params.id;
+router.get("/:id", (req, res) => {
+  const userId = req.params.id;
 
-    Notification.find({to: userId})
-        .then(notification => {
-            res.send(notification);
-        })
-        .catch(err => console.log(err))
+  Notification.find({ to: userId })
+    .then((notification) => {
+      res.send(notification);
+    })
+    .catch((err) => console.log(err));
 });
-
 
 module.exports = router;
