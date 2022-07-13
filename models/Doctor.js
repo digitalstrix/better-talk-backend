@@ -8,7 +8,7 @@ const DoctorSchema = new mongoose.Schema({
   minutes: {type: Number },
   loggedIn:  {type: String},
   rating:  {type: Array },
-  availability: {type: Map, of: Array},
+  availability: {type: Array, of: Array},
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);
