@@ -227,7 +227,7 @@ router.put('/wedavailability/:id', (req, res) => {
       } else {
         console.log("result: ", result);
         res.send({
-          message: "Doctor Availability updated successfully",
+          message: "Doctor Wed Availability updated successfully",
           data: result,
         });
       }
@@ -250,7 +250,7 @@ router.put('/thuavailability/:id', (req, res) => {
       } else {
         console.log("result: ", result);
         res.send({
-          message: "Doctor Availability updated successfully",
+          message: "Doctor Thu Availability updated successfully",
           data: result,
         });
       }

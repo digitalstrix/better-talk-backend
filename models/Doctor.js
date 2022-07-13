@@ -8,13 +8,13 @@ const DoctorSchema = new mongoose.Schema({
   minutes: {type: Number },
   loggedIn:  {type: String},
   rating:  {type: Array },
-  monAvailability: {type: Map, of: Boolean},
-  tueAvailability: {type: Map, of: Boolean},
-  wedAvailability: {type: Map, of: Boolean},
-  thuAvailability: {type: Map, of: Boolean},
-  friAvailability: {type: Map, of: Boolean},
-  satAvailability: {type: Map, of: Boolean},
-  sunAvailability: {type: Map, of: Boolean},
+  monAvailability: {type: Array, of: Boolean},
+  tueAvailability: {type: Array, of: Boolean},
+  wedAvailability: {type: Array, of: Boolean},
+  thuAvailability: {type: Array, of: Boolean},
+  friAvailability: {type: Array, of: Boolean},
+  satAvailability: {type: Array, of: Boolean},
+  sunAvailability: {type: Array, of: Boolean},
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);
