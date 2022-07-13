@@ -169,35 +169,14 @@ router.put('/ratings/:id', (req, res) => {
   );
 });
 
-// /api/doctors/availability/id
-router.put('/monavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { monAvailability: req.body.monAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Monday Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
 
 // /api/doctors/availability/id
-router.put('/tueavailability/:id', (req, res) => {
+router.put('/availability/:id', (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $set: { tueAvailability: req.body.tueAvailability },
+      $set: { availability: req.body.availability },
     },
     (err, result) => {
       if (err) {
@@ -205,119 +184,7 @@ router.put('/tueavailability/:id', (req, res) => {
       } else {
         console.log("result: ", result);
         res.send({
-          message: "Doctor Tue Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
-
-// /api/doctors/availability/id
-router.put('/wedavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { wedAvailability: req.body.wedAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Wed Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
-
-
-// /api/doctors/availability/id
-router.put('/thuavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { thuAvailability: req.body.thuAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Thu Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
-
-
-// /api/doctors/friavailability/id
-router.put('/friavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { friAvailability: req.body.friAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Fri Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
-
-// /api/doctors/availability/id
-router.put('/satavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { satAvailability: req.body.satAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Sat Availability updated successfully",
-          data: result,
-        });
-      }
-    }
-  );
-});
-
-// /api/doctors/availability/id
-router.put('/sunavailability/:id', (req, res) => {
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      $set: { sunAvailability: req.body.sunAvailability },
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Sunday Availability updated successfully",
+          message: "Doctor Availability updated successfully",
           data: result,
         });
       }
