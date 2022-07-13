@@ -12,7 +12,8 @@ router.post("/", (req, res) => {
     minutes: req.body.minutes,
     calls: req.body.calls,
     loggedIn: req.body.loggedIn,
-    ratings: req.body.ratings
+    ratings: req.body.ratings,
+    availability: req.body.availability
   });
 
   doctor
