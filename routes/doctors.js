@@ -168,5 +168,26 @@ router.put('/ratings/:id', (req, res) => {
   );
 });
 
+// /api/doctors/availability/id
+router.put('/availability/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { availability: req.body.availability },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor Availability updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
 
 module.exports = router;
