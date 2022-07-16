@@ -153,7 +153,7 @@ router.put('/ratings/:id', (req, res) => {
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $push: { rating: {from: req.body.from, rating: req.body.rating} },
+      $push: { rating: {from: req.body.from, rating: req.body.rating, date: req.body.date, feedback: req.body.feedback} },
     },
     (err, result) => {
       if (err) {
