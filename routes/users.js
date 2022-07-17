@@ -15,6 +15,8 @@ router.post("/", (req, res) => {
     medHistory: req.body.medHistory,
     freeSession: req.body.freeSession,
     upcomingApp: req.body.upcomingApp,
+    minutes: req.body.minutes,
+    sessions: req.body.sessions
   });
 
   user
