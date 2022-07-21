@@ -166,7 +166,7 @@ router.put("/medhistory/:id", (req, res) => {
   User.findByIdAndUpdate(
     userId,
     {
-      $set: { medHistory: req.body.medhistory },
+      $set: { medHistory: req.body.medHistory },
     },
     (err, result) => {
       if (err) {
@@ -188,7 +188,7 @@ router.put("/free/:id", (req, res) => {
   User.findByIdAndUpdate(
     userId,
     {
-      $set: { free: req.body.free },
+      $set: { freeSession: req.body.freeSession },
     },
     (err, result) => {
       if (err) {
