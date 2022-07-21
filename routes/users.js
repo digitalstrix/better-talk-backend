@@ -94,6 +94,28 @@ router.put("/age/:id", (req, res) => {
   );
 });
 
+// /api/users/qualification/id
+router.put("/qualification/:id", (req, res) => {
+  const userId = req.params.id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { qualification: req.body.qualification },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "User qualification updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
 // /api/users/gender/id
 router.put("/gender/:id", (req, res) => {
   const userId = req.params.id;
@@ -181,5 +203,7 @@ router.put("/free/:id", (req, res) => {
     }
   );
 });
+
+
 
 module.exports = router;
