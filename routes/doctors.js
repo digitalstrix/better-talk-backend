@@ -13,7 +13,11 @@ router.post("/", (req, res) => {
     calls: req.body.calls,
     loggedIn: req.body.loggedIn,
     ratings: req.body.ratings,
-    availability: req.body.availability
+    availability: req.body.availability,
+    patients: req.body.patients,
+    about: req.body.about,
+    experience: req.body.experience,
+    description: req.body.description,
   });
 
   doctor
