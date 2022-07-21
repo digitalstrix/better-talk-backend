@@ -48,7 +48,7 @@ router.get("/:id", (req, res) => {
 
   Doctor.findById(doctorId)
     .then((doctor) => {
-      doctor.sessions = req.body.sessions;
+      res.send(doctor);
     })
     .catch((err) => console.log(err));
 });
