@@ -198,4 +198,166 @@ router.put('/availability/:id', (req, res) => {
   );
 });
 
+// /api/doctors/patients/id
+router.put('/patients/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { patients: req.body.patients },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor patients updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// /api/doctors/description/id
+router.put('/description/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { description: req.body.description },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor description updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// /api/doctors/about/id
+router.put('/about/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { about: req.body.about },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor about updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+// /api/doctors/qualification/id
+router.put('/qualification/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { qualification: req.body.qualification },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor qualification updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+
+// /api/doctors/experience/id
+router.put('/experience/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { experience: req.body.experience },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor experience updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+
+// /api/doctors/age/id
+router.put('/age/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { age: req.body.age },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor age updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+
+// /api/doctors/gender/id
+router.put('/gender/:id', (req, res) => {
+  const doctorId = req.params.id;
+  Doctor.findByIdAndUpdate(
+    doctorId,
+    {
+      $set: { gender: req.body.gender },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "Doctor gender updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
 module.exports = router;
