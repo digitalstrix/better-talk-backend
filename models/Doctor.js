@@ -13,6 +13,8 @@ const DoctorSchema = new mongoose.Schema({
   patients: {type: String},
   experience: {type: String},
   description: {type: String},
+  age: {type: String},
+  gender: {type: String},
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

@@ -18,6 +18,8 @@ router.post("/", (req, res) => {
     about: req.body.about,
     experience: req.body.experience,
     description: req.body.description,
+    age: req.body.age,
+    gender: req.body.gender,
   });
 
   doctor
