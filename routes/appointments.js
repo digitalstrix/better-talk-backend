@@ -44,6 +44,20 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+
+// /api/appointments
+router.delete("/", (req, res) => {
+   Appointment.findOneAndDelete({from: req.body.from, to: req.body.to})
+      .then(appointment => {
+      res.send({
+        message: "Appointment deleted successfully",
+        data: result,
+      });
+      })
+      .catch(err => console.log(err)); 
+});
+
+
 // /api/appointments/upcoming/id
 router.get('/upcoming/:id', (req, res) => {
   const userId = req.params.id;
