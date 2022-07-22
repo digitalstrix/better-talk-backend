@@ -205,5 +205,50 @@ router.put("/free/:id", (req, res) => {
 });
 
 
+// /api/users/sessions/id
+router.put("/sessions/:id", (req, res) => {
+  const userId = req.params.id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { sessions: req.body.sessions },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "User sessions updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
+// /api/users/minutes/id
+router.put("/minutes/:id", (req, res) => {
+  const userId = req.params.id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { minutes: req.body.minutes },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "User minutes updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
 
 module.exports = router;
