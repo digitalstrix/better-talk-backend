@@ -2,6 +2,14 @@ const express = require("express");
 
 const User = require("../models/User");
 const Purchase = require("../models/Purchase");
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
+const fs = require('fs');
+
+function base64Encode(file) {
+  var body = fs.readFileSync(file);
+  return body.toString("base64");
+}
 
 const router = express.Router();
 
@@ -250,5 +258,58 @@ router.put("/minutes/:id", (req, res) => {
   );
 });
 
+router.post("/profile/:id", upload.single('Image'), async (req, res, next) => {
+  try {
+    var base64String = base64Encode(req.file.path);
+    const uploadString = "data:image/jpeg;base64," + base64String;
+    const uploadResponse = await cloudinary.uploader.upload(uploadString, {
+      overwrite: true,
+      invalidate: true,
+      crop: "fill",
+    });
+ var url =  uploadResponse.secure_url;
+ console.log(url);
+  } catch (e) {
+    console.log(e);
+  }
+  const userId = req.params.id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { profile: url },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "User Profile updated successfully",
+          data: result,
+        });
+      }
+    }
+  );
+});
 
+router.put("/available/:id", (req, res) => {
+  const userId = req.params.id;
+  User.findByIdAndUpdate(
+    userId,
+    {
+      $set: { isAvailable: req.body.status },
+    },
+    (err, result) => {
+      if (err) {
+        console.log("err: ", err);
+      } else {
+        console.log("result: ", result);
+        res.send({
+          message: "User Availability Status updated successfully",
+          // data: result,
+        });
+      }
+    }
+  );
+});
 module.exports = router;
