@@ -373,28 +373,33 @@ router.post("/profile/:id", upload.single("Image"), async (req, res, next) => {
       crop: "fill",
     });
     var url = uploadResponse.secure_url;
-    console.log(url);
+    const doctorId = req.params.id;
+    const data = await Doctor.findByIdAndUpdate(doctorId, {
+      profile: url,
+    });
+    console.log(url, data, doctorId);
+    if (data) {
+      res.status(200).send({
+        success: true,
+        message: "profile successfully changed",
+        data,
+      });
+    }
   } catch (e) {
     console.log(e);
   }
-  const doctorId = req.params.id;
-  Doctor.findByIdAndUpdate(
-    doctorId,
-    {
-      profile: url,
-    },
-    (err, result) => {
-      if (err) {
-        console.log("err: ", err);
-      } else {
-        console.log("result: ", result);
-        res.send({
-          message: "Doctor Profile updated successfully and changed",
-          data: result,
-        });
-      }
-    }
-  );
+
+  // (err, result) => {
+  //   if (err) {
+  //     console.log("err: ", err);
+  //   } else {
+  //     console.log("result: ", result);
+  //     res.send({
+  //       message: "Doctor Profile updated successfully and changed",
+  //       data: result,
+  //     });
+  //   }
+  // }
 });
 
 router.put("/available/:id", (req, res) => {
