@@ -389,7 +389,7 @@ router.post("/profile/:id", upload.single("Image"), async (req, res, next) => {
       } else {
         console.log("result: ", result);
         res.send({
-          message: "Doctor Profile updated successfully",
+          message: "Doctor Profile updated successfully and changed",
           data: result,
         });
       }
