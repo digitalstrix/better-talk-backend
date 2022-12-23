@@ -3,9 +3,9 @@ const express = require("express");
 const Doctor = require("../models/Doctor");
 
 const router = express.Router();
-const cloudinary = require('../utils/cloudinary');
-const upload = require('../utils/multer');
-const fs = require('fs');
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
+const fs = require("fs");
 
 function base64Encode(file) {
   var body = fs.readFileSync(file);
@@ -128,17 +128,16 @@ router.put("/minutes/:id", (req, res) => {
 });
 
 // /api/doctors/loggedin/all
-router.get('/loggedin/all', (req, res) => {
-
-  Doctor.find({loggedIn: 'Online'})
-      .then(doctor => {
-          res.send(doctor);
-      })
-      .catch(err => console.log(err))
+router.get("/loggedin/all", (req, res) => {
+  Doctor.find({ loggedIn: "Online" })
+    .then((doctor) => {
+      res.send(doctor);
+    })
+    .catch((err) => console.log(err));
 });
 
 // /api/doctors/loggedin/id
-router.put('/loggedin/:id', (req, res) => {
+router.put("/loggedin/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -159,15 +158,20 @@ router.put('/loggedin/:id', (req, res) => {
   );
 });
 
-
-
 // /api/doctors/ratings/id
-router.put('/ratings/:id', (req, res) => {
+router.put("/ratings/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $push: { rating: {from: req.body.from, rating: req.body.rating, date: req.body.date, feedback: req.body.feedback} },
+      $push: {
+        rating: {
+          from: req.body.from,
+          rating: req.body.rating,
+          date: req.body.date,
+          feedback: req.body.feedback,
+        },
+      },
     },
     (err, result) => {
       if (err) {
@@ -183,9 +187,8 @@ router.put('/ratings/:id', (req, res) => {
   );
 });
 
-
 // /api/doctors/availability/id
-router.put('/availability/:id', (req, res) => {
+router.put("/availability/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -207,7 +210,7 @@ router.put('/availability/:id', (req, res) => {
 });
 
 // /api/doctors/patients/id
-router.put('/patients/:id', (req, res) => {
+router.put("/patients/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -229,7 +232,7 @@ router.put('/patients/:id', (req, res) => {
 });
 
 // /api/doctors/description/id
-router.put('/description/:id', (req, res) => {
+router.put("/description/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -251,7 +254,7 @@ router.put('/description/:id', (req, res) => {
 });
 
 // /api/doctors/about/id
-router.put('/about/:id', (req, res) => {
+router.put("/about/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -272,9 +275,8 @@ router.put('/about/:id', (req, res) => {
   );
 });
 
-
 // /api/doctors/qualification/id
-router.put('/qualification/:id', (req, res) => {
+router.put("/qualification/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -295,10 +297,8 @@ router.put('/qualification/:id', (req, res) => {
   );
 });
 
-
-
 // /api/doctors/experience/id
-router.put('/experience/:id', (req, res) => {
+router.put("/experience/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -319,10 +319,8 @@ router.put('/experience/:id', (req, res) => {
   );
 });
 
-
-
 // /api/doctors/age/id
-router.put('/age/:id', (req, res) => {
+router.put("/age/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -343,10 +341,8 @@ router.put('/age/:id', (req, res) => {
   );
 });
 
-
-
 // /api/doctors/gender/id
-router.put('/gender/:id', (req, res) => {
+router.put("/gender/:id", (req, res) => {
   const doctorId = req.params.id;
   Doctor.findByIdAndUpdate(
     doctorId,
@@ -367,8 +363,7 @@ router.put('/gender/:id', (req, res) => {
   );
 });
 
-
-router.post("/profile/:id", upload.single('Image'), async (req, res, next) => {
+router.post("/profile/:id", upload.single("Image"), async (req, res, next) => {
   try {
     var base64String = base64Encode(req.file.path);
     const uploadString = "data:image/jpeg;base64," + base64String;
@@ -377,8 +372,8 @@ router.post("/profile/:id", upload.single('Image'), async (req, res, next) => {
       invalidate: true,
       crop: "fill",
     });
- var url =  uploadResponse.secure_url;
- console.log(url);
+    var url = uploadResponse.secure_url;
+    console.log(url);
   } catch (e) {
     console.log(e);
   }
@@ -386,7 +381,7 @@ router.post("/profile/:id", upload.single('Image'), async (req, res, next) => {
   Doctor.findByIdAndUpdate(
     doctorId,
     {
-      $set: { profile: url },
+      profile: url,
     },
     (err, result) => {
       if (err) {
